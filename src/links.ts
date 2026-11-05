@@ -1,6 +1,6 @@
 /**
- * Where the page sends people. Fill a link in and its notice goes live; leave it null and
- * the notice says "coming soon". The words on each notice are in src/render.ts.
+ * Where the page sends people. Fill a link in and its door opens; leave it null and it says
+ * "soon…". The words on each door are in src/render.ts.
  */
 export interface Links {
   /** the map */

@@ -10,58 +10,41 @@ export function safeUrl(url: string): string {
   return u.href;
 }
 
-interface Notice {
-  no: string;
-  title: string;
-  body: string;
+interface Door {
+  name: string;
+  hint: string;
   action: string;
 }
 
-const soon = '<p class="soon">Coming soon</p>';
+const soon = '<span class="soon">soon…</span>';
 
 const button = (href: string, label: string) =>
-  `<a class="act" href="${esc(safeUrl(href))}">${esc(label)} →</a>`;
+  `<a class="go" href="${esc(safeUrl(href))}">${esc(label)}</a>`;
 
 function newsletterAction(n: Links['newsletter']): string {
   if (!n) return soon;
-  if ('page' in n) return button(n.page, 'Sign up');
+  if ('page' in n) return button(n.page, 'Write me');
   return `<form class="signup" action="${esc(safeUrl(n.form))}" method="post" target="_blank">
-      <label for="email">Email address</label>
-      <div class="row"><input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
-      <button type="submit">Sign up</button></div>
+      <label for="email" class="sr">Email address</label>
+      <input id="email" name="email" type="email" required autocomplete="email" placeholder="your email">
+      <button type="submit" class="go">Write me</button>
     </form>`;
 }
 
-/** The three notices on the page, as HTML. Words: Mike's drafts, his to rewrite. */
-export function renderNotices(links: Links): string {
-  const notices: Notice[] = [
-    {
-      no: '01',
-      title: 'Explore the map',
-      body: 'Walk a rabbit along West Seattle’s main streets and find where the art went up.',
-      action: button(links.map, 'Open the map'),
-    },
-    {
-      no: '02',
-      title: 'Join the Garden Club',
-      body: 'Our Discord. Plan painting days, share what you find, help pick what gets made next. 13 and up.',
-      action: links.discord ? button(links.discord, 'Join on Discord') : soon,
-    },
-    {
-      no: '03',
-      title: 'Get the Garden Notice',
-      body: 'Once a month by email: what’s coming up, and what got made. Unsubscribe any time.',
-      action: newsletterAction(links.newsletter),
-    },
+/** The three ways in, as HTML. Words: Mike's drafts, his to rewrite. */
+export function renderDoors(links: Links): string {
+  const doors: Door[] = [
+    { name: 'The map', hint: 'Follow the lemons.', action: button(links.map, '▶ Walk') },
+    { name: 'The club', hint: 'Find the others.', action: links.discord ? button(links.discord, 'Come in') : soon },
+    { name: 'The letters', hint: 'Now and then, by email.', action: newsletterAction(links.newsletter) },
   ];
-  return notices
+  return doors
     .map(
-      (n) => `<article class="notice">
-    <p class="no">Notice No. ${n.no}</p>
-    <h2>${esc(n.title)}</h2>
-    <p>${esc(n.body)}</p>
-    ${n.action}
-  </article>`,
+      (d) => `<li class="door">
+      <span class="name">${esc(d.name)}</span>
+      <span class="hint">${esc(d.hint)}</span>
+      ${d.action}
+    </li>`,
     )
-    .join('\n  ');
+    .join('\n    ');
 }

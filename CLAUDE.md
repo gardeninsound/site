@@ -1,7 +1,8 @@
 # Garden in Sound · site — Development Guide
 
-The project's home page: one static page, a "public notice" with three notices (the map, the
-Garden Club Discord, the Garden Notice newsletter). Sibling of the map
+The project's home page: one static page in the map's title-screen look (dusk sky, stars,
+flying rabbits, ferns, a cream card) with three short "doors": the map, the club (Discord),
+the letters (newsletter). Whimsical, brief, a little mysterious. Sibling of the map
 (`../bearisland-map`, repo `gardeninsound/map`) and follows its rules.
 
 ## Commands
@@ -10,13 +11,15 @@ Garden Club Discord, the Garden Notice newsletter). Sibling of the map
 
 ## How it's built
 
-- `index.html` is the page. At build time the `notices` plugin in `vite.config.ts` replaces
-  `<!-- notices -->` with `renderNotices(links)` from `src/render.ts`, so the output is plain
-  HTML that works without JavaScript. `src/main.ts` only loads the fonts and `src/style.css`.
-- `src/links.ts`: where each notice points. `null` → "Coming soon". Only https links render
+- `index.html` is the page. At build time the `doors` plugin in `vite.config.ts` replaces
+  `<!-- doors -->` with `renderDoors(links)` from `src/render.ts`, so the links are plain HTML
+  that works without JavaScript. `src/main.ts` loads the font (Pixelify Sans), `src/style.css`
+  and `src/scene.ts`: the decorative sky, ported from the map's TitleScreen, FlyingRabbits and
+  TitleFerns (`src/fern.ts` is a copy of the map's `src/game/fern.ts`). Palette = the map's.
+- `src/links.ts`: where each door points. `null` → "soon…". Only https links render
   (`safeUrl`); tests in `src/render.test.ts`.
 - `base: './'`: the build works at `gardeninsound.github.io/site/`, on previews, and at a domain root.
-- **Words are Mike's** (`exit320-stack`): the notices in `src/render.ts`, header and footer in `index.html`.
+- **Words are Mike's** (`exit320-stack`): the doors in `src/render.ts`, the rest of the card in `index.html`.
 - **Privacy:** the page collects nothing. The newsletter form posts straight to the newsletter
   service. Don't add analytics, trackers or third-party scripts; fonts are self-hosted (fontsource).
 

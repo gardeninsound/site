@@ -1,16 +1,15 @@
 # Garden in Sound · site
 
-The home page for Garden in Sound: a public notice with three ways to take part.
-[The map](https://gardeninsound.website), the Garden Club (Discord), and the Garden Notice
-(newsletter).
+The home page for Garden in Sound, in the map's title-screen look, with three ways in:
+[the map](https://gardeninsound.website), the club (Discord), and the letters (newsletter).
 
 Live at **https://gardeninsound.github.io/site/** until it gets its own domain.
 
 ## Change it
 
-- **Links:** `src/links.ts`. A link left `null` shows "Coming soon".
-- **Words:** `src/render.ts` (the three notices) and `index.html` (the header and footer).
-- **Look:** `src/style.css`.
+- **Links:** `src/links.ts`. A link left `null` shows "soon…".
+- **Words:** `src/render.ts` (the three doors) and `index.html` (the rest of the card).
+- **Look:** `src/style.css`; the sky, rabbits and ferns are `src/scene.ts`.
 
 ```sh
 npm install

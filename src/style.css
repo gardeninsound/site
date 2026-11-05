@@ -1,67 +1,103 @@
-/* A civic bulletin, the "official costume" of the manual: paper, ink, a red stamp,
-   civic blue for links. Three numbered notices, one per way to take part. */
+/* The map's title screen: a dusk sky over grass, stars, flying rabbits, ferns, and a cream
+   card with a pink logo. Same palette as the map (src/city/ui/ui.css there). */
 :root {
-  --paper: #f3f1ea;
-  --card: #fbfaf6;
-  --ink: #1b1d22;
-  --ink-2: #565a63;
-  --rule: #cfcabd;
-  --stamp: #c8361f;
-  --civic: #1f4d8f;
-  --display: 'Archivo Black', 'Arial Black', Impact, sans-serif;
-  --body: 'Spectral', Georgia, 'Times New Roman', serif;
-  --mono: 'Space Mono', ui-monospace, Menlo, monospace;
+  --ink: #2b2350;
+  --paper: #fff7e6;
+  --pink: #ff7eb6;
+  --teal: #2ec4b6;
+  --yellow: #ffe066;
+  --plum: #7a40a0;
+  --pixel: 'Pixelify Sans', system-ui, sans-serif;
+  --frame: 0 0 0 4px var(--ink), 0 0 0 8px var(--paper), 0 0 0 12px var(--ink);
   color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #16181c; --card: #1e2126; --ink: #ece9e1; --ink-2: #a6a39b;
-    --rule: #3a3d44; --stamp: #f0684e; --civic: #84aef0;
-    color-scheme: dark;
-  }
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--paper); color: var(--ink); font: 18px/1.6 var(--body); }
-main { max-width: 1000px; margin: 0 auto; padding: 48px 20px 64px; display: grid; gap: 40px; }
-a { color: var(--civic); text-underline-offset: 3px; }
-:focus-visible { outline: 3px solid var(--stamp); outline-offset: 2px; }
-h1, h2 { font-family: var(--display); font-weight: 400; line-height: 1.05; text-wrap: balance; margin: 0; }
-p { margin: 0; }
+html, body { min-height: 100%; }
+body {
+  margin: 0; min-height: 100vh; min-height: 100svh;
+  display: grid; place-items: center; padding: 40px 24px;
+  overflow-x: hidden; position: relative;
+  color: var(--ink); font: 19px/1.4 var(--pixel);
+  background:
+    linear-gradient(transparent 62%, #2f8f45 62%, #2f8f45 70%, #7ed957 70%),
+    linear-gradient(#2b2350, #7a40a0 45%, #ff7eb6 62%);
+  background-attachment: fixed;
+}
+:focus-visible { outline: 3px dashed var(--pink); outline-offset: 4px; }
 
-header { border-bottom: 4px double var(--ink); padding-bottom: 28px; display: grid; gap: 14px; justify-items: start; }
-.stamp {
-  font: 700 13px var(--mono); letter-spacing: .2em; text-transform: uppercase;
-  color: var(--stamp); border: 2px solid var(--stamp); padding: 4px 10px; transform: rotate(-2deg);
-}
-h1 { font-size: clamp(44px, 9vw, 96px); text-transform: uppercase; }
-.dek { font-size: 21px; max-width: 34em; }
+.sky, .front { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+.front { z-index: 2; }
 
-.notices { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; }
-.notice {
-  background: var(--card); border: 2px solid var(--ink); padding: 20px 20px 22px;
-  display: flex; flex-direction: column; gap: 10px;
+.card {
+  position: relative; z-index: 1; text-align: center;
+  width: min(480px, 100%); background: var(--paper); padding: 30px 26px 24px;
+  box-shadow: var(--frame), 12px 12px 0 12px rgba(0, 0, 0, 0.25);
 }
-.notice .no { font: 13px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--stamp); }
-.notice h2 { font-size: 26px; text-transform: uppercase; }
-.notice > p:not(.no):not(.soon) { flex: 1; }
-.act, .signup button {
-  align-self: start; font: 700 15px var(--mono); text-decoration: none; text-transform: uppercase; letter-spacing: .06em;
-  color: var(--paper); background: var(--ink); border: 2px solid var(--ink); padding: 9px 14px; cursor: pointer;
+.kicker { margin: 0 0 10px; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: var(--plum); }
+h1 {
+  margin: 0; font-weight: 700; text-transform: uppercase; line-height: 1;
+  font-size: clamp(44px, 13vw, 76px); color: var(--pink);
+  text-shadow: 3px 3px 0 var(--ink), 6px 6px 0 var(--teal);
 }
-.act:hover, .signup button:hover { background: var(--civic); border-color: var(--civic); }
-.soon {
-  align-self: start; font: 700 13px var(--mono); text-transform: uppercase; letter-spacing: .1em;
-  color: var(--ink-2); border: 2px dashed var(--ink-2); padding: 7px 12px;
+.sub { margin: 18px 0 22px; font-size: 21px; }
+
+.doors { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; text-align: left; }
+.door {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 14px;
+  padding: 10px 12px; border: 3px solid var(--ink); background: #fff;
 }
-.signup { display: grid; gap: 6px; }
-.signup label { font: 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--ink-2); }
-.signup .row { display: flex; gap: 8px; flex-wrap: wrap; }
+.door .name { font-weight: 700; font-size: 20px; }
+.door .hint { grid-column: 1; font-size: 16px; color: var(--plum); }
+.door > .go, .door > .soon { grid-column: 2; grid-row: 1 / span 2; }
+.go {
+  font: 700 16px var(--pixel); color: var(--ink); text-decoration: none; white-space: nowrap;
+  background: var(--yellow); border: 0; padding: 8px 12px; cursor: pointer;
+  box-shadow: 0 0 0 3px var(--ink), 4px 4px 0 3px rgba(0, 0, 0, 0.25);
+}
+.go:hover { background: var(--pink); }
+.go:active { transform: translate(2px, 2px); }
+.soon { font-size: 16px; color: var(--plum); opacity: .7; }
+.signup { grid-column: 1 / -1; display: flex; gap: 10px; margin-top: 8px; }
 .signup input {
-  flex: 1 1 160px; min-width: 0; font: 16px var(--body); padding: 8px 10px;
-  background: var(--paper); color: var(--ink); border: 2px solid var(--ink);
+  flex: 1; min-width: 0; font: 17px var(--pixel); padding: 6px 8px;
+  border: 3px solid var(--ink); background: var(--paper); color: var(--ink);
+}
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.fine { margin: 18px 0 0; font-size: 15px; opacity: .7; }
+
+/* stars and flying rabbits (scene.ts) */
+.star { position: absolute; width: 4px; height: 4px; background: #fff; animation: blink 1.6s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.flyer { position: absolute; left: 0; animation: fly-right linear infinite; }
+.flyer-left { animation-name: fly-left; }
+.flyer-left i { transform: scaleX(-1); }
+.flyer i {
+  display: block; image-rendering: pixelated;
+  animation: flap 0.36s steps(2) infinite, bob 1.4s ease-in-out infinite alternate;
+}
+@keyframes fly-right { from { transform: translateX(-100px); } to { transform: translateX(calc(100vw + 20px)); } }
+@keyframes fly-left { from { transform: translateX(calc(100vw + 20px)); } to { transform: translateX(-100px); } }
+.flyer-rare { animation-name: fly-rare-right; animation-timing-function: ease-in-out; }
+.flyer-rare.flyer-left { animation-name: fly-rare-left; }
+@keyframes fly-rare-right { 0% { transform: translateX(-180px); } 25%, 100% { transform: translateX(calc(100vw + 40px)); } }
+@keyframes fly-rare-left { 0% { transform: translateX(calc(100vw + 40px)); } 25%, 100% { transform: translateX(-180px); } }
+@keyframes flap { to { background-position: var(--flap) 0; } }
+@keyframes bob { from { margin-top: -6px; } to { margin-top: 6px; } }
+
+/* ferns in the bottom corners (scene.ts): 160×120 at ×4, ×3 on phones */
+.fern { position: absolute; bottom: 0; width: 640px; height: 480px; image-rendering: pixelated; }
+.fern-left { left: -150px; }
+.fern-right { right: -150px; }
+@media (max-width: 700px) {
+  .fern { width: 480px; height: 360px; }
+  .fern-left { left: -220px; }
+  .fern-right { right: -220px; }
 }
 
-footer { border-top: 4px double var(--ink); padding-top: 18px; display: grid; gap: 6px; }
-.motto { font-family: var(--display); font-size: 20px; text-transform: uppercase; }
-.small { font: 13px var(--mono); color: var(--ink-2); }
+@media (prefers-reduced-motion: reduce) {
+  .star, .flyer, .flyer i { animation: none; }
+  .flyer { transform: translateX(8vw); }
+  .flyer-left { transform: translateX(80vw); }
+  .flyer-rare { display: none; }
+}
