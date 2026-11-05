@@ -10,41 +10,53 @@ export function safeUrl(url: string): string {
   return u.href;
 }
 
-interface Door {
-  name: string;
-  hint: string;
-  action: string;
-}
+/**
+ * A door is a row: a name, a hint, and on the right either a pill, "soon…", or (for the
+ * newsletter's email form) the form under it. With a link, the whole row is the link.
+ */
+type Door = { name: string; hint: string } & ({ href: string; label: string } | { soon: true } | { form: string });
 
 const soon = '<span class="soon">soon…</span>';
 
-const button = (href: string, label: string) =>
-  `<a class="go" href="${esc(safeUrl(href))}">${esc(label)}</a>`;
+function newsletterDoor(n: Links['newsletter']): Door {
+  const words = { name: 'The letters', hint: 'Now and then, by email.' };
+  if (!n) return { ...words, soon: true };
+  if ('page' in n) return { ...words, href: n.page, label: 'Write me' };
+  return { ...words, form: n.form };
+}
 
-function newsletterAction(n: Links['newsletter']): string {
-  if (!n) return soon;
-  if ('page' in n) return button(n.page, 'Write me');
-  return `<form class="signup" action="${esc(safeUrl(n.form))}" method="post" target="_blank">
-      <label for="email" class="sr">Email address</label>
-      <input id="email" name="email" type="email" required autocomplete="email" placeholder="your email">
-      <button type="submit" class="go">Write me</button>
-    </form>`;
+const text = (d: Door) => `<span class="name">${esc(d.name)}</span>
+      <span class="hint">${esc(d.hint)}</span>`;
+
+function renderDoor(d: Door): string {
+  if ('href' in d)
+    return `<li><a class="door" href="${esc(safeUrl(d.href))}">
+      ${text(d)}
+      <span class="go">${esc(d.label)}</span>
+    </a></li>`;
+  if ('form' in d)
+    return `<li class="door">
+      ${text(d)}
+      <form class="signup" action="${esc(safeUrl(d.form))}" method="post" target="_blank">
+        <label for="email" class="sr">Email address</label>
+        <input id="email" name="email" type="email" required autocomplete="email" placeholder="your email">
+        <button type="submit" class="go">Write me</button>
+      </form>
+    </li>`;
+  return `<li class="door">
+      ${text(d)}
+      ${soon}
+    </li>`;
 }
 
 /** The three ways in, as HTML. Words: Mike's drafts, his to rewrite. */
 export function renderDoors(links: Links): string {
   const doors: Door[] = [
-    { name: 'The map', hint: 'Follow the lemons.', action: button(links.map, 'Walk') },
-    { name: 'The club', hint: 'Find the others.', action: links.discord ? button(links.discord, 'Come in') : soon },
-    { name: 'The letters', hint: 'Now and then, by email.', action: newsletterAction(links.newsletter) },
+    { name: 'The map', hint: 'Follow the lemons.', href: links.map, label: 'Walk' },
+    links.discord
+      ? { name: 'The club', hint: 'Find the others.', href: links.discord, label: 'Come in' }
+      : { name: 'The club', hint: 'Find the others.', soon: true },
+    newsletterDoor(links.newsletter),
   ];
-  return doors
-    .map(
-      (d) => `<li class="door">
-      <span class="name">${esc(d.name)}</span>
-      <span class="hint">${esc(d.hint)}</span>
-      ${d.action}
-    </li>`,
-    )
-    .join('\n    ');
+  return doors.map(renderDoor).join('\n    ');
 }

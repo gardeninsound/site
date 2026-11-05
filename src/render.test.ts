@@ -7,6 +7,9 @@ describe('the doors', () => {
     const html = renderDoors(links);
     expect(html).toContain(`href="${safeUrl(links.map)}"`);
     expect(html.match(/class="door"/g)).toHaveLength(3);
+    // with a link, the whole row is the link: no link nested inside it
+    expect(html).toMatch(new RegExp(`<a class="door" href="${safeUrl(links.map)}">[^]*?The map[^]*?</a>`));
+    expect(html.match(/<a /g)).toHaveLength(1);
   });
 
   it('say "soon…" until a link is filled in', () => {

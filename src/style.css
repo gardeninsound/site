@@ -37,17 +37,26 @@ h1 {
 .doors { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .door {
   display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 20px;
-  padding: 18px 0; border-bottom: 1px solid var(--line);
+  padding: 18px 0;
 }
 .door .name { font-weight: 600; font-size: 19px; }
 .door .hint { grid-column: 1; font-size: 16px; color: var(--muted); }
 .door > .go, .door > .soon { grid-column: 2; grid-row: 1 / span 2; }
+/* a door with a link: the whole row is the link */
+a.door {
+  color: inherit; text-decoration: none; margin: 0 -14px; padding-left: 14px; padding-right: 14px;
+  border-radius: 10px; transition: background-color .15s;
+}
+.doors li { border-bottom: 1px solid var(--line); }
+a.door:hover, a.door:focus-visible { background: rgba(255, 247, 230, 0.07); }
+a.door:hover .go, a.door:focus-visible .go { background: var(--paper); }
+a.door:focus-visible { outline-offset: -2px; }
 .go {
   font: 600 15px var(--text); color: var(--ink); text-decoration: none; white-space: nowrap;
   background: var(--yellow); border: 0; border-radius: 999px; padding: 9px 18px; cursor: pointer;
   transition: background-color .15s;
 }
-.go:hover { background: var(--paper); }
+button.go:hover { background: var(--paper); }
 .soon { font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .signup { grid-column: 1 / -1; display: flex; gap: 10px; margin-top: 10px; }
 .signup input {
@@ -58,7 +67,7 @@ h1 {
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 .fine { margin: 0; font-size: 14px; color: var(--muted); }
 
-@media (prefers-reduced-motion: reduce) { .go { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .go, a.door { transition: none; } }
 
 /* links in running text */
 .fine a:not(.go), .prose a { color: var(--paper); text-underline-offset: 3px; }
