@@ -8,7 +8,7 @@ Live at **https://gardeninsound.github.io/site/** until it gets its own domain.
 ## Change it
 
 - **Links:** `src/links.ts`. A link left `null` shows "soon…".
-- **Words:** `src/render.ts` (the three doors) and `index.html` (the rest of the card).
+- **Words:** `src/render.ts` (the three doors), `index.html`, and `about.html` (the about page).
 - **Look:** `src/style.css`.
 
 ```sh

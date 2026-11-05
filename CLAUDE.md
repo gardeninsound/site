@@ -15,10 +15,11 @@ pixel wordmark (Pixelify Sans) is the only nod to the map; everything you read i
 - `index.html` is the page. At build time the `doors` plugin in `vite.config.ts` replaces
   `<!-- doors -->` with `renderDoors(links)` from `src/render.ts`, so the links are plain HTML
   that works without JavaScript. `src/main.ts` only loads the fonts and `src/style.css`.
+- `about.html`: the about page (what the project is, Mike, why). Second build input in `vite.config.ts`.
 - `src/links.ts`: where each door points. `null` → "soon…". Only https links render
   (`safeUrl`); tests in `src/render.test.ts`.
 - `base: './'`: the build works at `gardeninsound.github.io/site/`, on previews, and at a domain root.
-- **Words are Mike's** (`exit320-stack`): the doors in `src/render.ts`, the rest of the card in `index.html`.
+- **Words are Mike's** (`exit320-stack`): the doors in `src/render.ts`, the rest of `index.html`, and all of `about.html` (adapted from the manual).
 - **Privacy:** the page collects nothing. The newsletter form posts straight to the newsletter
   service. Don't add analytics, trackers or third-party scripts; fonts are self-hosted (fontsource).
 

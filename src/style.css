@@ -15,11 +15,12 @@
 }
 
 * { box-sizing: border-box; }
+html { background: var(--ink); }
 body {
   margin: 0; min-height: 100vh; min-height: 100svh;
   display: grid; align-items: center; padding: 56px 24px;
   color: var(--paper); font: 18px/1.5 var(--text);
-  background: linear-gradient(170deg, var(--ink) 0%, #3d2a68 45%, var(--plum) 78%, #b45a9a 100%) fixed;
+  background: linear-gradient(170deg, var(--ink) 0%, #3d2a68 45%, var(--plum) 78%, #b45a9a 100%);
 }
 main { width: min(560px, 100%); margin: 0 auto; display: grid; gap: 40px; }
 :focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
@@ -58,3 +59,20 @@ h1 {
 .fine { margin: 0; font-size: 14px; color: var(--muted); }
 
 @media (prefers-reduced-motion: reduce) { .go { transition: none; } }
+
+/* links in running text */
+.fine a:not(.go), .prose a { color: var(--paper); text-underline-offset: 3px; }
+.fine a:not(.go) { margin-left: 10px; }
+
+/* the about page */
+.about { gap: 36px; }
+.about nav .home { font: 700 20px var(--mark); color: var(--pink); text-decoration: none; text-shadow: 2px 2px 0 var(--ink); }
+.about h1 { font-size: clamp(38px, 9vw, 56px); }
+.prose { display: grid; gap: 14px; }
+.prose p { margin: 0; }
+.prose .lead { font-size: 22px; line-height: 1.4; }
+.prose h2 { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); }
+.prose p:not(.lead) { color: rgba(255, 247, 230, 0.86); }
+blockquote { margin: 6px 0 0; padding: 4px 0 4px 18px; border-left: 3px solid var(--pink); }
+blockquote p { font-size: 20px; color: var(--paper) !important; }
+blockquote footer { margin-top: 6px; font-size: 14px; color: var(--muted); }

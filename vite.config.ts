@@ -8,6 +8,8 @@ export default defineConfig({
   // Relative asset paths: the same build works at gardeninsound.github.io/site/, on a PR
   // preview, and at the root of a custom domain.
   base: './',
+  // two pages: the start page and the about page
+  build: { rollupOptions: { input: { main: 'index.html', about: 'about.html' } } },
   plugins: [
     {
       name: 'doors',
