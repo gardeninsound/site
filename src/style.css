@@ -1,0 +1,67 @@
+/* A civic bulletin, the "official costume" of the manual: paper, ink, a red stamp,
+   civic blue for links. Three numbered notices, one per way to take part. */
+:root {
+  --paper: #f3f1ea;
+  --card: #fbfaf6;
+  --ink: #1b1d22;
+  --ink-2: #565a63;
+  --rule: #cfcabd;
+  --stamp: #c8361f;
+  --civic: #1f4d8f;
+  --display: 'Archivo Black', 'Arial Black', Impact, sans-serif;
+  --body: 'Spectral', Georgia, 'Times New Roman', serif;
+  --mono: 'Space Mono', ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #16181c; --card: #1e2126; --ink: #ece9e1; --ink-2: #a6a39b;
+    --rule: #3a3d44; --stamp: #f0684e; --civic: #84aef0;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 18px/1.6 var(--body); }
+main { max-width: 1000px; margin: 0 auto; padding: 48px 20px 64px; display: grid; gap: 40px; }
+a { color: var(--civic); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--stamp); outline-offset: 2px; }
+h1, h2 { font-family: var(--display); font-weight: 400; line-height: 1.05; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+
+header { border-bottom: 4px double var(--ink); padding-bottom: 28px; display: grid; gap: 14px; justify-items: start; }
+.stamp {
+  font: 700 13px var(--mono); letter-spacing: .2em; text-transform: uppercase;
+  color: var(--stamp); border: 2px solid var(--stamp); padding: 4px 10px; transform: rotate(-2deg);
+}
+h1 { font-size: clamp(44px, 9vw, 96px); text-transform: uppercase; }
+.dek { font-size: 21px; max-width: 34em; }
+
+.notices { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; }
+.notice {
+  background: var(--card); border: 2px solid var(--ink); padding: 20px 20px 22px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.notice .no { font: 13px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--stamp); }
+.notice h2 { font-size: 26px; text-transform: uppercase; }
+.notice > p:not(.no):not(.soon) { flex: 1; }
+.act, .signup button {
+  align-self: start; font: 700 15px var(--mono); text-decoration: none; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--paper); background: var(--ink); border: 2px solid var(--ink); padding: 9px 14px; cursor: pointer;
+}
+.act:hover, .signup button:hover { background: var(--civic); border-color: var(--civic); }
+.soon {
+  align-self: start; font: 700 13px var(--mono); text-transform: uppercase; letter-spacing: .1em;
+  color: var(--ink-2); border: 2px dashed var(--ink-2); padding: 7px 12px;
+}
+.signup { display: grid; gap: 6px; }
+.signup label { font: 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--ink-2); }
+.signup .row { display: flex; gap: 8px; flex-wrap: wrap; }
+.signup input {
+  flex: 1 1 160px; min-width: 0; font: 16px var(--body); padding: 8px 10px;
+  background: var(--paper); color: var(--ink); border: 2px solid var(--ink);
+}
+
+footer { border-top: 4px double var(--ink); padding-top: 18px; display: grid; gap: 6px; }
+.motto { font-family: var(--display); font-size: 20px; text-transform: uppercase; }
+.small { font: 13px var(--mono); color: var(--ink-2); }
