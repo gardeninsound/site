@@ -1,8 +1,9 @@
 # Garden in Sound · site — Development Guide
 
-The project's home page: one static page in the map's title-screen look (dusk sky, stars,
-flying rabbits, ferns, a cream card) with three short "doors": the map, the club (Discord),
-the letters (newsletter). Whimsical, brief, a little mysterious. Sibling of the map
+The project's home page: one static page with three short "doors": the map, the club
+(Discord), the letters (newsletter). Brief and a little mysterious. It uses the map's colors
+but is deliberately calmer than the map: a still dusk gradient, one column, no game art. The
+pixel wordmark (Pixelify Sans) is the only nod to the map; everything you read is Figtree. Sibling of the map
 (`../bearisland-map`, repo `gardeninsound/map`) and follows its rules.
 
 ## Commands
@@ -13,9 +14,7 @@ the letters (newsletter). Whimsical, brief, a little mysterious. Sibling of the 
 
 - `index.html` is the page. At build time the `doors` plugin in `vite.config.ts` replaces
   `<!-- doors -->` with `renderDoors(links)` from `src/render.ts`, so the links are plain HTML
-  that works without JavaScript. `src/main.ts` loads the font (Pixelify Sans), `src/style.css`
-  and `src/scene.ts`: the decorative sky, ported from the map's TitleScreen, FlyingRabbits and
-  TitleFerns (`src/fern.ts` is a copy of the map's `src/game/fern.ts`). Palette = the map's.
+  that works without JavaScript. `src/main.ts` only loads the fonts and `src/style.css`.
 - `src/links.ts`: where each door points. `null` → "soon…". Only https links render
   (`safeUrl`); tests in `src/render.test.ts`.
 - `base: './'`: the build works at `gardeninsound.github.io/site/`, on previews, and at a domain root.

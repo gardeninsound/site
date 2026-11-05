@@ -1,6 +1,6 @@
 # Garden in Sound · site
 
-The home page for Garden in Sound, in the map's title-screen look, with three ways in:
+The home page for Garden in Sound, in the map's colors, with three ways in:
 [the map](https://gardeninsound.website), the club (Discord), and the letters (newsletter).
 
 Live at **https://gardeninsound.github.io/site/** until it gets its own domain.
@@ -9,7 +9,7 @@ Live at **https://gardeninsound.github.io/site/** until it gets its own domain.
 
 - **Links:** `src/links.ts`. A link left `null` shows "soon…".
 - **Words:** `src/render.ts` (the three doors) and `index.html` (the rest of the card).
-- **Look:** `src/style.css`; the sky, rabbits and ferns are `src/scene.ts`.
+- **Look:** `src/style.css`.
 
 ```sh
 npm install

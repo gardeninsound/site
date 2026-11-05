@@ -34,7 +34,7 @@ function newsletterAction(n: Links['newsletter']): string {
 /** The three ways in, as HTML. Words: Mike's drafts, his to rewrite. */
 export function renderDoors(links: Links): string {
   const doors: Door[] = [
-    { name: 'The map', hint: 'Follow the lemons.', action: button(links.map, '▶ Walk') },
+    { name: 'The map', hint: 'Follow the lemons.', action: button(links.map, 'Walk') },
     { name: 'The club', hint: 'Find the others.', action: links.discord ? button(links.discord, 'Come in') : soon },
     { name: 'The letters', hint: 'Now and then, by email.', action: newsletterAction(links.newsletter) },
   ];
