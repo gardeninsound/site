@@ -22,7 +22,7 @@ function newsletterDoor(n: Links['newsletter']): Door {
   const words = {
     name: 'The letters',
     hint: 'Now and then, by email.',
-    detail: 'A short letter about once a month: what’s coming up, and what got made.',
+    detail: 'Our newsletter! Sporadic and full of magic and mystery. Read along with us.',
   };
   if (!n) return { ...words, soon: true };
   if ('page' in n) return { ...words, href: n.page, label: 'Write me' };
@@ -59,13 +59,13 @@ export function renderDoors(links: Links): string {
   const club = {
     name: 'The Gardeners Club',
     hint: 'Find the others.',
-    detail: 'Our Discord: say hello, share what you find, hear about events first. 13 and up.',
+    detail: 'Join our Discord! Come say hello, organize events, make art!',
   };
   const doors: Door[] = [
     {
       name: 'The map',
       hint: 'Follow the lemons.',
-      detail: 'Walk a rabbit through West Seattle in your browser, find where Mike’s art went up, and wave at the other visitors.',
+      detail: 'A rabbit, a few streets, some lemons. See where they lead.',
       href: links.map,
       label: 'Walk',
     },
