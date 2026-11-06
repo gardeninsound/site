@@ -14,19 +14,24 @@ export function safeUrl(url: string): string {
  * A door is a row: a name, a hint, and on the right either a pill, "soon…", or (for the
  * newsletter's email form) the form under it. With a link, the whole row is the link.
  */
-type Door = { name: string; hint: string } & ({ href: string; label: string } | { soon: true } | { form: string });
+type Door = { name: string; hint: string; detail: string } & ({ href: string; label: string } | { soon: true } | { form: string });
 
 const soon = '<span class="soon">soon…</span>';
 
 function newsletterDoor(n: Links['newsletter']): Door {
-  const words = { name: 'The letters', hint: 'Now and then, by email.' };
+  const words = {
+    name: 'The letters',
+    hint: 'Now and then, by email.',
+    detail: 'A short letter about once a month: what’s coming up, and what got made.',
+  };
   if (!n) return { ...words, soon: true };
   if ('page' in n) return { ...words, href: n.page, label: 'Write me' };
   return { ...words, form: n.form };
 }
 
 const text = (d: Door) => `<span class="name">${esc(d.name)}</span>
-      <span class="hint">${esc(d.hint)}</span>`;
+      <span class="hint">${esc(d.hint)}</span>
+      <span class="detail">${esc(d.detail)}</span>`;
 
 function renderDoor(d: Door): string {
   if ('href' in d)
@@ -51,11 +56,20 @@ function renderDoor(d: Door): string {
 
 /** The three ways in, as HTML. Words: Mike's drafts, his to rewrite. */
 export function renderDoors(links: Links): string {
+  const club = {
+    name: 'The Gardeners Club',
+    hint: 'Find the others.',
+    detail: 'Our Discord: say hello, share what you find, hear about events first. 13 and up.',
+  };
   const doors: Door[] = [
-    { name: 'The map', hint: 'Follow the lemons.', href: links.map, label: 'Walk' },
-    links.discord
-      ? { name: 'The club', hint: 'Find the others.', href: links.discord, label: 'Come in' }
-      : { name: 'The club', hint: 'Find the others.', soon: true },
+    {
+      name: 'The map',
+      hint: 'Follow the lemons.',
+      detail: 'Walk a rabbit through West Seattle in your browser, find where Mike’s art went up, and wave at the other visitors.',
+      href: links.map,
+      label: 'Walk',
+    },
+    links.discord ? { ...club, href: links.discord, label: 'Come in' } : { ...club, soon: true },
     newsletterDoor(links.newsletter),
   ];
   return doors.map(renderDoor).join('\n    ');
@@ -86,7 +100,7 @@ export function renderRedirect(url: string, name: string): string {
 /** Short addresses on gardeninsound.org (path → where it goes), from the links that exist. */
 export function shortLinks(links: Links): Record<string, { url: string; name: string }> {
   const out: Record<string, { url: string; name: string }> = { map: { url: links.map, name: 'the map' } };
-  if (links.discord) out.discord = { url: links.discord, name: 'the club' };
+  if (links.discord) out.discord = { url: links.discord, name: 'the Gardeners Club' };
   if (links.newsletter && 'page' in links.newsletter) out.letters = { url: links.newsletter.page, name: 'the letters' };
   return out;
 }
