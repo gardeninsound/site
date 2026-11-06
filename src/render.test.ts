@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { links } from './links.ts';
-import { renderDoors, safeUrl } from './render.ts';
+import { renderDoors, renderRedirect, safeUrl, shortLinks } from './render.ts';
 
 describe('the doors', () => {
   it('render the real links', () => {
@@ -9,7 +9,7 @@ describe('the doors', () => {
     expect(html.match(/class="door"/g)).toHaveLength(3);
     // with a link, the whole row is the link: no link nested inside it
     expect(html).toMatch(new RegExp(`<a class="door" href="${safeUrl(links.map)}">[^]*?The map[^]*?</a>`));
-    expect(html.match(/<a /g)).toHaveLength(1);
+    expect(html.match(/<a /g)?.length).toBe(html.match(/<a class="door"/g)?.length);
   });
 
   it('say "soon…" until a link is filled in', () => {
@@ -32,5 +32,19 @@ describe('the doors', () => {
   it('refuse anything but https links', () => {
     expect(() => renderDoors({ ...links, discord: 'javascript:alert(1)' })).toThrow(/https/);
     expect(() => renderDoors({ ...links, newsletter: { page: 'http://example.com' } })).toThrow(/https/);
+  });
+});
+
+describe('short links', () => {
+  it('exist only for links that are filled in', () => {
+    expect(Object.keys(shortLinks({ map: 'https://gardeninsound.website', discord: null, newsletter: null }))).toEqual(['map']);
+    expect(Object.keys(shortLinks({ ...links, discord: 'https://discord.gg/abc', newsletter: { page: 'https://x.substack.com' } }))).toEqual(['map', 'discord', 'letters']);
+  });
+
+  it('send you straight on', () => {
+    const html = renderRedirect('https://discord.gg/abc', 'the club');
+    expect(html).toContain('<meta http-equiv="refresh" content="0; url=https://discord.gg/abc" />');
+    expect(html).toContain('noindex');
+    expect(() => renderRedirect('javascript:alert(1)', 'x')).toThrow(/https/);
   });
 });
