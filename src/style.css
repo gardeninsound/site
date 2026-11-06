@@ -1,0 +1,87 @@
+/* The map's colors, without the game: a still dusk sky, one column, a pixel wordmark as the
+   only nod to the map, and a clean sans for everything you read. */
+:root {
+  --ink: #2b2350;
+  --plum: #7a40a0;
+  --pink: #ff7eb6;
+  --teal: #2ec4b6;
+  --yellow: #ffe066;
+  --paper: #fff7e6;
+  --muted: rgba(255, 247, 230, 0.68);
+  --line: rgba(255, 247, 230, 0.18);
+  --mark: 'Pixelify Sans', system-ui, sans-serif;
+  --text: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--ink); }
+body {
+  margin: 0; min-height: 100vh; min-height: 100svh;
+  display: grid; align-items: center; padding: 56px 24px;
+  color: var(--paper); font: 18px/1.5 var(--text);
+  background: linear-gradient(170deg, var(--ink) 0%, #3d2a68 45%, var(--plum) 78%, #b45a9a 100%);
+}
+main { width: min(560px, 100%); margin: 0 auto; display: grid; gap: 40px; }
+:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
+
+header { display: grid; gap: 10px; }
+.kicker { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); }
+h1 {
+  margin: 0; font: 700 clamp(44px, 11vw, 72px)/1 var(--mark); color: var(--pink);
+  text-shadow: 3px 3px 0 var(--ink);
+  text-wrap: balance;
+}
+.sub { margin: 4px 0 0; font-size: 20px; color: var(--muted); }
+
+.doors { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.door {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 20px;
+  padding: 18px 0;
+}
+.door .name { font-weight: 600; font-size: 19px; }
+.door .hint { grid-column: 1; font-size: 16px; color: var(--muted); }
+.door > .go, .door > .soon { grid-column: 2; grid-row: 1 / span 2; }
+/* a door with a link: the whole row is the link */
+a.door {
+  color: inherit; text-decoration: none; margin: 0 -14px; padding-left: 14px; padding-right: 14px;
+  border-radius: 10px; transition: background-color .15s;
+}
+.doors li { border-bottom: 1px solid var(--line); }
+a.door:hover, a.door:focus-visible { background: rgba(255, 247, 230, 0.07); }
+a.door:hover .go, a.door:focus-visible .go { background: var(--paper); }
+a.door:focus-visible { outline-offset: -2px; }
+.go {
+  font: 600 15px var(--text); color: var(--ink); text-decoration: none; white-space: nowrap;
+  background: var(--yellow); border: 0; border-radius: 999px; padding: 9px 18px; cursor: pointer;
+  transition: background-color .15s;
+}
+button.go:hover { background: var(--paper); }
+.soon { font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.signup { grid-column: 1 / -1; display: flex; gap: 10px; margin-top: 10px; }
+.signup input {
+  flex: 1; min-width: 0; font: 16px var(--text); padding: 9px 14px; border-radius: 999px;
+  border: 1px solid var(--line); background: rgba(255, 247, 230, 0.08); color: var(--paper);
+}
+.signup input::placeholder { color: var(--muted); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.fine { margin: 0; font-size: 14px; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) { .go, a.door { transition: none; } }
+
+/* links in running text */
+.fine a:not(.go), .prose a { color: var(--paper); text-underline-offset: 3px; }
+.fine a:not(.go) { margin-left: 10px; }
+
+/* the about page */
+.about { gap: 36px; }
+.about nav .home { font: 700 20px var(--mark); color: var(--pink); text-decoration: none; text-shadow: 2px 2px 0 var(--ink); }
+.about h1 { font-size: clamp(38px, 9vw, 56px); }
+.prose { display: grid; gap: 14px; }
+.prose p { margin: 0; }
+.prose .lead { font-size: 22px; line-height: 1.4; }
+.prose h2 { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); }
+.prose p:not(.lead) { color: rgba(255, 247, 230, 0.86); }
+blockquote { margin: 6px 0 0; padding: 4px 0 4px 18px; border-left: 3px solid var(--pink); }
+blockquote p { font-size: 20px; color: var(--paper) !important; }
+blockquote footer { margin-top: 6px; font-size: 14px; color: var(--muted); }
