@@ -32,6 +32,10 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    # A Pages deploy takes seconds; one stuck on GitHub's side shouldn't hang for long. Note a
+    # cancelled deploy can't be re-run for the same commit (Pages names deploys by commit):
+    # merge a new commit instead.
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
