@@ -16,6 +16,7 @@ pixel wordmark (Pixelify Sans) is the only nod to the map; everything you read i
   `<!-- doors -->` with `renderDoors(links)` from `src/render.ts`, so the links are plain HTML
   that works without JavaScript. `src/main.ts` only loads the fonts and `src/style.css`.
 - `about.html`: the about page (what the project is, Mike, why). Second build input in `vite.config.ts`.
+- `email/`: the `garden-hello` Email Worker. `hello@gardeninsound.org` → every address in its `TO` secret (never put addresses in the repo: it's public). Deployed by hand, `npx wrangler deploy` in `email/`. → `email/README.md`
 - `src/links.ts`: where each door points. `null` → "soon…". Only https links render
   (`safeUrl`); tests in `src/render.test.ts`.
 - Live at https://gardeninsound.org (GitHub Pages behind Cloudflare; DNS and setup in README.md). `base: './'`: the build also works on previews.

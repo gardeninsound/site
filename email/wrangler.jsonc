@@ -1,0 +1,14 @@
+// Mail to hello@gardeninsound.org goes to this Worker (an Email Routing rule), which forwards
+// each message to every address in the TO secret. Cloudflare's own forwarding rules allow only
+// one destination each, hence a Worker. TO is a secret (comma-separated addresses), not a var,
+// because this repo is public. Every address must be a verified Email Routing destination.
+// Deploy: `npx wrangler deploy` in this folder. See README.md.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "garden-hello",
+  // the project's Cloudflare account (Mike's), so a deploy can't land anywhere else
+  "account_id": "7de05f51e1fe91fd717fe174fcfba85d",
+  "compatibility_date": "2026-11-01",
+  "main": "src/index.js",
+  "workers_dev": false
+}
