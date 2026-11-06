@@ -7,7 +7,9 @@ Live at **https://gardeninsound.org**.
 
 ## Change it
 
-- **Links:** `src/links.ts`. A link left `null` shows "soon…".
+- **Links:** `src/links.ts`. A link left `null` shows "soon…". Each filled-in link also gets a
+  short address for posters and QR codes: `gardeninsound.org/map`, `/discord`, `/letters`
+  (redirect pages made at build time), so the real link can change without reprinting.
 - **Words:** `src/render.ts` (the three doors), `index.html`, and `about.html` (the about page).
 - **Look:** `src/style.css`.
 

@@ -18,6 +18,6 @@ export interface Links {
 
 export const links: Links = {
   map: 'https://gardeninsound.website',
-  discord: null,
+  discord: 'https://discord.gg/35JBFPzWeT',
   newsletter: null,
 };

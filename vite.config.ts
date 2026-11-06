@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import { links } from './src/links.ts';
-import { renderDoors } from './src/render.ts';
+import { renderDoors, renderRedirect, shortLinks } from './src/render.ts';
 
 // The page is plain HTML: the doors are written into index.html at build time from
 // src/links.ts, so the page works without JavaScript and search engines see the links.
@@ -14,6 +14,14 @@ export default defineConfig({
     {
       name: 'doors',
       transformIndexHtml: (html) => html.replace('<!-- doors -->', renderDoors(links)),
+    },
+    {
+      // short addresses for posters and QR codes: /map, /discord, /letters → the real links
+      name: 'short-links',
+      generateBundle() {
+        for (const [path, { url, name }] of Object.entries(shortLinks(links)))
+          this.emitFile({ type: 'asset', fileName: `${path}/index.html`, source: renderRedirect(url, name) });
+      },
     },
   ],
 });

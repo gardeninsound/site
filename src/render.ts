@@ -60,3 +60,33 @@ export function renderDoors(links: Links): string {
   ];
   return doors.map(renderDoor).join('\n    ');
 }
+
+/**
+ * A page that sends you straight on to `url`: for short addresses like gardeninsound.org/discord
+ * that posters and QR codes can use, so the real link can change without reprinting.
+ */
+export function renderRedirect(url: string, name: string): string {
+  const href = esc(safeUrl(url));
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content="0; url=${href}" />
+    <title>${esc(name)} · Garden in Sound</title>
+  </head>
+  <body style="background:#2b2350;color:#fff7e6;font:18px/1.5 system-ui,sans-serif;padding:40px 24px">
+    <p>On your way to ${esc(name)}… <a style="color:#ffe066" href="${href}">Go now</a></p>
+  </body>
+</html>
+`;
+}
+
+/** Short addresses on gardeninsound.org (path → where it goes), from the links that exist. */
+export function shortLinks(links: Links): Record<string, { url: string; name: string }> {
+  const out: Record<string, { url: string; name: string }> = { map: { url: links.map, name: 'the map' } };
+  if (links.discord) out.discord = { url: links.discord, name: 'the club' };
+  if (links.newsletter && 'page' in links.newsletter) out.letters = { url: links.newsletter.page, name: 'the letters' };
+  return out;
+}
