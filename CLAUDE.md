@@ -1,6 +1,6 @@
 # Garden in Sound · site — Development Guide
 
-The project's home page: one static page with three short "doors": the map, the club
+The project's home page: one static page with three short "doors": the map, the Gardeners Club
 (Discord), the letters (newsletter). Brief and a little mysterious. It uses the map's colors
 but is deliberately calmer than the map: a still dusk gradient, one column, no game art. The
 pixel wordmark (Pixelify Sans) is the only nod to the map; everything you read is Figtree. Sibling of the map

@@ -40,8 +40,9 @@ h1 {
   padding: 18px 0;
 }
 .door .name { font-weight: 600; font-size: 19px; }
-.door .hint { grid-column: 1; font-size: 16px; color: var(--muted); }
-.door > .go, .door > .soon { grid-column: 2; grid-row: 1 / span 2; }
+.door .hint { grid-column: 1; font-size: 16px; color: var(--paper); font-style: italic; }
+.door .detail { grid-column: 1; font-size: 15px; line-height: 1.45; color: var(--muted); margin-top: 2px; }
+.door > .go, .door > .soon { grid-column: 2; grid-row: 1 / span 3; }
 /* a door with a link: the whole row is the link */
 a.door {
   color: inherit; text-decoration: none; margin: 0 -14px; padding-left: 14px; padding-right: 14px;

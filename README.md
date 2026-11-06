@@ -1,7 +1,7 @@
 # Garden in Sound · site
 
 The home page for Garden in Sound, in the map's colors, with three ways in:
-[the map](https://gardeninsound.website), the club (Discord), and the letters (newsletter).
+[the map](https://gardeninsound.website), the Gardeners Club (Discord), and the letters (newsletter).
 
 Live at **https://gardeninsound.org**.
 
