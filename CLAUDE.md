@@ -18,7 +18,7 @@ pixel wordmark (Pixelify Sans) is the only nod to the map; everything you read i
 - `about.html`: the about page (what the project is, Mike, why). Second build input in `vite.config.ts`.
 - `src/links.ts`: where each door points. `null` → "soon…". Only https links render
   (`safeUrl`); tests in `src/render.test.ts`.
-- `base: './'`: the build works at `gardeninsound.github.io/site/`, on previews, and at a domain root.
+- Live at https://gardeninsound.org (GitHub Pages behind Cloudflare; DNS and setup in README.md). `base: './'`: the build also works on previews.
 - **Words are Mike's** (`exit320-stack`): the doors in `src/render.ts`, the rest of `index.html`, and all of `about.html` (adapted from the manual).
 - **Privacy:** the page collects nothing. The newsletter form posts straight to the newsletter
   service. Don't add analytics, trackers or third-party scripts; fonts are self-hosted (fontsource).
@@ -29,5 +29,5 @@ As in the map's CLAUDE.md: a short branch from fresh `main`, a PR, the **Check**
 (`.github/workflows/ci.yml`: size guard, tests, build), then auto-merge
 (`gh pr merge --auto --squash --delete-branch`), adding the other person as reviewer when it
 touches their area. Never push to `main` directly. `main` deploys to GitHub Pages
-(`deploy.yml`). PR previews: `preview.yml` → `preview/` (Worker `site-preview`), cleaned up by
+(`deploy.yml`) at gardeninsound.org. PR previews: `preview.yml` → `preview/` (Worker `site-preview`), cleaned up by
 `preview-cleanup.yml`; both skip without the `CLOUDFLARE_API_TOKEN` secret.

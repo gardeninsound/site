@@ -3,7 +3,7 @@
 The home page for Garden in Sound, in the map's colors, with three ways in:
 [the map](https://gardeninsound.website), the club (Discord), and the letters (newsletter).
 
-Live at **https://gardeninsound.github.io/site/** until it gets its own domain.
+Live at **https://gardeninsound.org**.
 
 ## Change it
 
@@ -31,10 +31,16 @@ The email box posts straight to the newsletter service, so addresses never pass 
 site. Set `newsletter` in `src/links.ts` to `{ form: '<the service's embed form address>' }`,
 or `{ page: '<its signup page>' }` to link out instead.
 
-## Giving it a domain
+## The domain
 
-1. Buy the domain in the project's Cloudflare account (Exit320's Account).
-2. Add `public/CNAME` containing the domain, and merge.
-3. In Cloudflare DNS, point it at GitHub Pages (proxied), with SSL/TLS on **Full**, as for
-   `gardeninsound.website` (see the map's `docs/hosting.md`).
-4. GitHub → this repo → Settings → Pages → Custom domain.
+`gardeninsound.org` is in the project's Cloudflare account (Exit320's Account), next to
+`gardeninsound.website` (the map). DNS points at GitHub Pages through Cloudflare's proxy:
+
+| Type | Name | Content | Proxy |
+|---|---|---|---|
+| A | `@` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (four records) | proxied |
+| CNAME | `www` | `gardeninsound.github.io` | proxied |
+
+SSL/TLS mode is **Full**, not Full (strict): behind the proxy GitHub serves its generic
+certificate, which strict mode rejects (error 526). The custom domain is set in GitHub → this
+repo → Settings → Pages (`public/CNAME` records it too).
